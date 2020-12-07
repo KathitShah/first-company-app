@@ -1,6 +1,6 @@
 # bhailu_mama_app
 
-A new Flutter application.
+First Flutter App for Uncle Company
 
 ## Getting Started
 
