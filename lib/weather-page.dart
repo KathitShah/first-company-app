@@ -5,6 +5,7 @@ import 'main.dart';
 import 'weather.dart';
 import 'package:extension/string.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'dart:io' show Platform;
 
 class WeatherPage extends StatefulWidget {
   @override

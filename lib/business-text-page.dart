@@ -9,6 +9,7 @@ import 'package:map_launcher/map_launcher.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:geolocator/geolocator.dart';
+import 'dart:io' show Platform;
 
 class BusinessTextPage extends StatefulWidget {
   dynamic businessId;

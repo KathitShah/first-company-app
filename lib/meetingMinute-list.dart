@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'web.dart';
 import 'main.dart';
 import 'package:date_format/date_format.dart';
+import 'dart:io' show Platform;
 
 class MeetingsListPage extends StatefulWidget {
   @override

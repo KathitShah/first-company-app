@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'web.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'main.dart';
+import 'dart:io' show Platform;
 
 class MeetingsItemPage extends StatefulWidget {
   String id;
@@ -14,21 +15,6 @@ class MeetingsItemPage extends StatefulWidget {
 }
 
 class _MeetingsItemPageState extends State<MeetingsItemPage> {
-  // String meetingDataURL;
-  //
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   getMeetingsPage();
-  // }
-  //
-  // void getMeetingsPage() async {
-  //   var meetingPage = await WebModel().getMeetingsMinute(widget.id);
-  //   setState(() {
-  //     meetingDataURL = meetingPage;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {

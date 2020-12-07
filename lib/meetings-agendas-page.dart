@@ -3,6 +3,7 @@ import 'package:bhailu_mama_app/meetingMinute-list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
+import 'dart:io' show Platform;
 
 class MeetingsAgendasPage extends StatefulWidget {
   @override

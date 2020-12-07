@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'web.dart';
+import 'dart:io' show Platform;
 
 class ServiceRequestsPage extends StatefulWidget {
   @override

@@ -5,6 +5,7 @@ import 'main.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'news-announcements-notice.dart';
 import 'package:date_format/date_format.dart';
+import 'dart:io' show Platform;
 
 class NewsAnnouncementsPage extends StatefulWidget {
   @override

@@ -1,6 +1,6 @@
 import 'dart:collection';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'dart:io' show Platform;
 import 'location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'dart:math' as math;
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:io' show Platform;
 
 class ContactPage extends StatefulWidget {
   @override

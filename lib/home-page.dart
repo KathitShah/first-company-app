@@ -7,6 +7,7 @@ import 'dart:math' as math;
 import 'main.dart';
 import 'web.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'dart:io' show Platform;
 
 class HomePage extends StatefulWidget {
   @override

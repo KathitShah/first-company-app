@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'web.dart';
+import 'dart:io' show Platform;
 
 class CommunityDetailPage extends StatefulWidget {
   String eventId;
@@ -60,7 +61,6 @@ class _CommunityDetailPageState extends State<CommunityDetailPage> {
             ),
             body: SingleChildScrollView(
               child: Container(
-                margin: EdgeInsets.all(30.0),
                 child: Text("${eventData[0]["EventsDescription"]}"),
               ),
             ),

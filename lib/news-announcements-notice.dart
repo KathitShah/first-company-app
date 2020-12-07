@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:io' show Platform;
 
 class NoticePage extends StatefulWidget {
   dynamic notice;
@@ -42,8 +43,7 @@ class _NoticePageState extends State<NoticePage> {
           iconTheme: IconThemeData(color: Colors.white),
         ),
       ),
-      body: Center(
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
           child: Stack(
             children: [
               Container(
@@ -64,7 +64,6 @@ class _NoticePageState extends State<NoticePage> {
             ],
           ),
         ),
-      ),
     );
   }
 }

@@ -5,6 +5,7 @@ import 'web.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'alert-text-page.dart';
 import 'package:date_format/date_format.dart';
+import 'dart:io' show Platform;
 
 class AlertPage extends StatefulWidget {
   @override

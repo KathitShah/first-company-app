@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:io' show Platform;
 
 class CovidPage extends StatefulWidget {
   @override

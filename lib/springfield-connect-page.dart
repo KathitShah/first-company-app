@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'web.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'dart:io' show Platform;
 
 class SpringfieldConnectPage extends StatefulWidget {
   @override
