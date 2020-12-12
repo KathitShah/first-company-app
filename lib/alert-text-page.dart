@@ -4,6 +4,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'alert-page.dart';
 import 'dart:io' show Platform;
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class AlertTextPage extends StatefulWidget {
   dynamic alertData;
