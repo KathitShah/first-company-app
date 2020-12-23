@@ -33,9 +33,16 @@ class _MessagingWidgetState extends State<MessagingWidget> {
             body: '${notification['body']}',
           ));
         });
+        
       },
       onResume: (Map<String, dynamic> message) async {
         print("onResume: $message");
+        final notification = message['notification'];
+        setState(() {
+          messages.add(Message(
+              title: notification['title'], body: notification['body']));
+        });
+
       },
     );
     _firebaseMessaging.requestNotificationPermissions(
@@ -43,9 +50,14 @@ class _MessagingWidgetState extends State<MessagingWidget> {
   }
 
   @override
-  Widget build(BuildContext context) => ListView(
+  Widget build(BuildContext context) => Container(
+    height: double.infinity,
+    child: ListView(
+      shrinkWrap: true,
         children: messages.map(buildMessage).toList(),
-      );
+        reverse: true,
+      ),
+  );
 
   Widget buildMessage(Message message) => ListTile(
         title: Text(message.title),

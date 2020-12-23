@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
@@ -491,69 +493,99 @@ class _AlertPageState extends State<AlertPage> {
                     DateTime(yearThere, monthThere, dateThere),
                     [MM, ' ', d, ', ', yyyy]).toUpperCase();
 
-                return ListTile(
-                  title: Stack(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(children: [
-                            Icon(
-                              FontAwesomeIcons.solidBell,
-                              color: Colors.redAccent,
-                            ),
-                            SizedBox(
-                              width: 20.0,
-                            ),
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '$dateText',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                    color: Colors.grey,
-                                    fontSize: 14.0,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 2.5,
-                                ),
-                                Text(
-                                  '$singleLine',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 17.5,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ]),
-                        ],
-                      ),
-                      Positioned(
-                        right: 0,
-                        child: Icon(
-                          FontAwesomeIcons.chevronCircleRight,
-                          color: Colors.red,
-                        ),
-                      )
-                    ],
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AlertTextPage(
-                          alertData: alertData["data"][index],
-                        ),
-                      ),
-                    );
-                  },
-                );
+                return AlertsTile(
+                    dateText: dateText,
+                    singleLine: singleLine,
+                    alertData: alertData["data"][index]);
               },
             ),
+
+            //     ListView.builder(
+            //   itemCount: alertData["data"].length,
+            //   itemBuilder: (context, index) {
+            //     var singleLine;
+            //     if (alertData["data"][index]["MessageText"].length >= 35) {
+            //       var text = alertData["data"][index]["MessageText"];
+            //       var notification = text.substring(0, 35);
+            //       var r = '$notification...';
+            //       singleLine = r.replaceAll("\n", " ");
+            //     } else {
+            //       singleLine = alertData["data"][index]["MessageText"];
+            //     }
+            //     var dates = alertData["data"][index]["MessageDate"];
+            //     String year = dates.substring(0, 4);
+            //     int yearThere = int.parse(year);
+            //     String month = dates.substring(5, 7);
+            //     int monthThere = int.parse(month);
+            //     String date = dates.substring(8, 10);
+            //     int dateThere = int.parse(date);
+            //     var dateText = formatDate(
+            //         DateTime(yearThere, monthThere, dateThere),
+            //         [MM, ' ', d, ', ', yyyy]).toUpperCase();
+            //
+            //     return ListTile(
+            //       title: Stack(
+            //         children: [
+            //           Row(
+            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //             children: [
+            //               Row(children: [
+            //                 Icon(
+            //                   FontAwesomeIcons.solidBell,
+            //                   color: Colors.redAccent,
+            //                 ),
+            //                 SizedBox(
+            //                   width: 20.0,
+            //                 ),
+            //                 Column(
+            //                   mainAxisSize: MainAxisSize.min,
+            //                   crossAxisAlignment: CrossAxisAlignment.start,
+            //                   children: [
+            //                     Text(
+            //                       '$dateText',
+            //                       style: TextStyle(
+            //                         fontWeight: FontWeight.w900,
+            //                         color: Colors.grey,
+            //                         fontSize: 14.0,
+            //                       ),
+            //                     ),
+            //                     SizedBox(
+            //                       height: 2.5,
+            //                     ),
+            //                     Text(
+            //                       '$singleLine',
+            //                       style: TextStyle(
+            //                         fontWeight: FontWeight.w400,
+            //                         fontSize: 17.5,
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ]),
+            //             ],
+            //           ),
+            //           Positioned(
+            //             right: 0,
+            //             child: Icon(
+            //               FontAwesomeIcons.chevronCircleRight,
+            //               color: Colors.red,
+            //             ),
+            //           )
+            //         ],
+            //       ),
+            //       onTap: () {
+            //         Navigator.push(
+            //           context,
+            //           MaterialPageRoute(
+            //             builder: (context) => AlertTextPage(
+            //               alertData: alertData["data"][index],
+            //             ),
+            //           ),
+            //         );
+            //       },
+            //     );
+            //   },
+            // ),
             bottomNavigationBar: BottomAppBar(
               color: Color(0xff356b8c),
               elevation: 0,
@@ -622,5 +654,83 @@ class _AlertPageState extends State<AlertPage> {
               ],
             ),
           );
+  }
+}
+
+class AlertsTile extends StatelessWidget {
+  const AlertsTile({
+    Key key,
+    @required this.dateText,
+    @required this.singleLine,
+    @required this.alertData,
+  }) : super(key: key);
+
+  final String dateText;
+  final singleLine;
+  final alertData;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Stack(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(children: [
+                Icon(
+                  FontAwesomeIcons.solidBell,
+                  color: Colors.redAccent,
+                ),
+                SizedBox(
+                  width: 20.0,
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '$dateText',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        color: Colors.grey,
+                        fontSize: 14.0,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 2.5,
+                    ),
+                    Text(
+                      '$singleLine',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 17.5,
+                      ),
+                    ),
+                  ],
+                ),
+              ]),
+            ],
+          ),
+          Positioned(
+            right: 0,
+            child: Icon(
+              FontAwesomeIcons.chevronCircleRight,
+              color: Colors.red,
+            ),
+          )
+        ],
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AlertTextPage(
+              alertData: alertData,
+            ),
+          ),
+        );
+      },
+    );
   }
 }

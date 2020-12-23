@@ -1,10 +1,13 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:math' as math;
 import 'main.dart';
+import 'message.dart';
 import 'web.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'dart:io' show Platform;
@@ -17,11 +20,53 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   dynamic carouselData;
   int num;
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  final List<Message> messages = [];
+  Timer timer;
 
   @override
   void initState() {
     super.initState();
     getCarouselData();
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print("onMessage: $message");
+        final notification = message['notification'];
+        setState(() {
+          messages.add(Message(
+            title: '${notification['title']}',
+            body: '${notification['body']}',
+          ));
+        });
+        await Navigator.pushNamed(context, '/alert');
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+        // AlertTextPage(alertData: alertData)
+        final notification = message['data'];
+        setState(() {
+          messages.add(Message(
+            title: '${notification['title']}',
+            body: '${notification['body']}',
+          ));
+        });
+        await Navigator.pushNamed(context, '/alert');
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume: $message");
+        // AlertTextPage(alertData: alertData)
+        final notification = message['notification'];
+        setState(() {
+          messages.add(Message(
+            title: '${notification['title']}',
+            body: '${notification['body']}',
+          ));
+        });
+        await Navigator.pushNamed(context, '/alert');
+      },
+    );
+    _firebaseMessaging.requestNotificationPermissions(
+        const IosNotificationSettings(sound: true, badge: true, alert: true));
   }
 
   void getCarouselData() async {
@@ -489,13 +534,13 @@ class _HomePageState extends State<HomePage> {
                                       return Stack(
                                         children: [
                                           Container(
-                                              child: Image(
-                                            image: NetworkImage(
-                                              '${carouselData[i]["PhotoFileName"]}',
+                                            child: CachedNetworkImage(
+                                              imageUrl:
+                                                  '${carouselData[i]["PhotoFileName"]}',
+                                              width: double.infinity,
+                                              fit: BoxFit.cover,
                                             ),
-                                            width: double.infinity,
-                                            fit: BoxFit.fill,
-                                          )),
+                                          ),
                                           Container(
                                             child: Stack(
                                               overflow: Overflow.visible,

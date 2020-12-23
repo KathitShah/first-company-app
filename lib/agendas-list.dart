@@ -1,8 +1,10 @@
 import 'package:bhailu_mama_app/agenda-item.dart';
 import 'package:bhailu_mama_app/web.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'message.dart';
 import 'web.dart';
 import 'dart:io' show Platform;
 import 'main.dart';
@@ -15,6 +17,7 @@ class AgendasListPage extends StatefulWidget {
 
 class _AgendasListPageState extends State<AgendasListPage> {
   List<dynamic> agendaData;
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
   @override
   void initState() {
@@ -471,6 +474,37 @@ class _AgendasListPageState extends State<AgendasListPage> {
             ),
             body: Stack(
               children: [
+                // StreamBuilder(
+                //           stream: FirebaseFirestore.instance
+                //               .collection("blogs")
+                //               .orderBy("time", descending: true)
+                //               .snapshots(),
+                //           builder:
+                //               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                //             if (snapshot.hasError) {
+                //               return Text("Error ${snapshot.hasError}");
+                //             }
+                //             switch (snapshot.connectionState) {
+                //               case ConnectionState.waiting:
+                //                 return Text("Loading...");
+                //                 break;
+                //               default:
+                //                 return ListView.builder(
+                //                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                //                   itemCount: snapshot.data.docs.length,
+                //                   itemBuilder: (context, index) {
+                //                     return BLogTile(
+                //                       imgUrl: snapshot.data.docs[index]["imgUrl"],
+                //                       title: snapshot.data.docs[index]["title"],
+                //                       authorName: snapshot.data.docs[index]["author"],
+                //                       desc: snapshot.data.docs[index]["desc"],
+                //                     );
+                //                   },
+                //                 );
+                //             }
+                //           },
+                //         ),
+
                 ListView.builder(
                   itemCount: agendaData.length,
                   itemBuilder: (context, index) {
